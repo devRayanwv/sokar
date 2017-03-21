@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('welcome');
 });
-// ddd
+// d
 
 Auth::routes();
 
