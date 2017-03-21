@@ -123,7 +123,7 @@
     <script src="js/bootstrap-progressbar.min.js"></script>
     <script src="js/jquery.inputmask.bundle.min.js"></script>
     <!-- Custom Theme Scripts -->
-    <script src="js/custom.min.js"></script>
+    <script src="js/custom.js"></script>
     <script src="js/index.js"></script>
 
   </body>
