@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <!-- page content -->
     <div class="right_col" role="main">
         <div class="">
@@ -17,7 +18,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Plain Page</h2>
+                            <h2>Graph Bar for Latest Seven Test.</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -38,7 +39,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Plain Page</h2>
+                            <h2>Latest 10 Test Record.</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -48,7 +49,47 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
+                            <!-- start user projects -->
+                            <table class="data table table-striped no-margin">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Level</th>
+                                    <th>With</th>
+                                    <th>Note</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($data as $d)
+                                    <tr>
+                                        <td>{{ $d->id }}</td>
+                                        <td class="hidden-phone">{{ $d->value }}</td>
+                                        <td class="hidden-phone">
+                                        @if (!$d->exercise_id)
+                                        @if (!$d->medicine_id)
+                                            No Medicine&Exercise
+                                            @endif
+                                            @endif
 
+                                            @if ($d->exercise_id)
+                                                @if (!$d->medicine_id)
+                                                    Exercise
+                                                @endif
+                                            @endif
+                                            @if (!$d->exercise_id)
+                                                @if ($d->medicine_id)
+                                                    Medicine
+                                                @endif
+                                            @endif
+                                        </td>
+                                        <td>{{ $d->note }}</td>
+
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                            <!-- end user projects -->
                         </div>
                     </div>
                 </div>

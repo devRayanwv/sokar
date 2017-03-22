@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Mail;
+use App\Role;
+use DB;
+
 class RegisterController extends Controller
 {
     /*
@@ -65,11 +68,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if ($user)
+            $user->attachRole(2);
+
+        return $user;
     }
 
     protected function register(Request $request)

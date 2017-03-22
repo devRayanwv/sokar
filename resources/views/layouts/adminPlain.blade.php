@@ -8,15 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Dashboard</title>
-      <!-- Bootstrap -->
-      <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-      <!-- Font Awesome -->
-      <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-      <!-- NProgress -->
-      <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
 
-      <!-- Custom Theme Style -->
-      <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{{ asset('css/nprogress.css') }}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -45,26 +46,31 @@
 
             <br />
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Main Options</h3>
-                <ul class="nav side-menu">
-                    <li><a href="/dashboard"><i class="fa fa-home"></i>Home</a></li>
-                    <li><a href="/dashboard/mbs"><i class="fa fa-tint"></i>Manage Blood Sugar</a></li>
-                    <li><a href="/dashboard/medicine"><i class="fa fa-stethoscope"></i>Medicine</a></li>
-                    <li><a href="/dashboard/exercise"><i class="fa fa-thumbs-o-up"></i>Exercise</a></li>
-                    <li><a href="/dashnoard/pdf"><i class="fa fa-file-pdf-o"></i>PDF files</a></li>
-                    <li><a href="/dashboard/links"><i class="fa fa-link"></i>Links</a></li>
-                    <li><a href="/dashboard/profile"><i class="fa fa-folder-open"></i>Profile</a></li>
-                    <li><a href="/dashboard/settings"><i class="fa fa-cogs"></i>Settings</a></li>
+              <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                  <div class="menu_section">
+                      <h3>Main Options</h3>
+                      <ul class="nav side-menu">
+                          <li><a href="/admin"><i class="fa fa-home"></i>Home</a></li>
 
 
-                </ul>
+                          <li><a href="/admin/profile"><i class="fa fa-folder-open"></i>Profile</a></li>
+
+                      </ul>
+                  </div>
+
+                  <div class="menu_section">
+                      <h3>System</h3>
+                      <ul class="nav side-menu">
+                          <li><a href="/admin/settings"><i class="fa fa-cogs"></i>Settings</a></li>
+                          <li><a href="/admin/errors"><i class="fa fa-bug"></i> Error Log</a>
+                          </li>
+                          <li><a href="/admin/backup"><i class="fa fa-windows"></i> Backup</a>
+                          </li>
+                      </ul>
+                  </div>
+
+
               </div>
-
-            </div>
-            <!-- /sidebar menu -->
 
 
           </div>
@@ -85,8 +91,6 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li><a href="javascript:;">Help</a></li>
                     <li><a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -114,6 +118,7 @@
         <!-- /footer content -->
       </div>
     </div>
+
     <!-- jQuery -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
@@ -130,5 +135,6 @@
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/index.js') }}"></script>
+
   </body>
 </html>

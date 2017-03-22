@@ -2972,8 +2972,38 @@ if (typeof NProgress != 'undefined') {
 			  //echart Bar
 			  
 			if ($('#mainb').length ){
-			  
-				  var echartBar = echarts.init(document.getElementById('mainb'), theme);
+                // Ajax call
+				var noExeMed = new Array();
+				var med = ['1'];
+				var exer = ['7'];
+
+                $.ajax({
+                    url: '/dashboard/latestTest',
+                    dataType: 'application/json',
+                    complete: function (data) {
+                        var entries = JSON.parse(data.responseText)
+                        jQuery.each(entries, function(i ,val){
+                        	if (val.exercise_id == null && val.medicine_id == null)
+                        		noExeMed.push(val.value);
+                        	else if (val.exercise_id == null && val.medicine_id == 1)
+                        		med.push(val.value);
+							else if (val.exercise_id == 1 && val.medicine_id == null)
+                                exer.push(val.value)
+						});
+
+
+                    },
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+
+                console.log(noExeMed.toString());
+
+                console.log(['1', '2', '3', '4', '5', '6', '7']);
+
+
+                var echartBar = echarts.init(document.getElementById('mainb'), theme);
 
 				  echartBar.setOption({
 					title: {
@@ -2984,7 +3014,7 @@ if (typeof NProgress != 'undefined') {
 					  trigger: 'axis'
 					},
 					legend: {
-					  data: ['Exercise', 'Medicine', 'Exercise&Medicine']
+					  data: ['Exercise', 'Medicine', 'NoExerciseMedicine']
 					},
 					toolbox: {
 					  show: false
@@ -2992,7 +3022,7 @@ if (typeof NProgress != 'undefined') {
 					calculable: false,
 					xAxis: [{
 					  type: 'category',
-					  data: ['1?', '2?', '3?', '4?', '5?', '6?', '7?', '8?', '9?', '10?', '11?', '12?']
+					  data: ['1', '2', '3', '4', '5', '6', '7']
 					}],
 					yAxis: [{
 					  type: 'value',
@@ -3000,7 +3030,7 @@ if (typeof NProgress != 'undefined') {
 					series: [{
 					  name: 'Exercise',
 					  type: 'bar',
-					  data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+					  data: ['7.3','7.8','5.5','6.6','7.1','6.9','5.7'],
 					  markPoint: {
 						data: [{
 						  type: 'max',
@@ -3012,14 +3042,14 @@ if (typeof NProgress != 'undefined') {
 					  },
 					  markLine: {
 						data: [{
-                            yAxis: 60, // Max & Min sugar level
+                            yAxis: 4, // Max & Min sugar level
 
                         }]
 					  }
 					}, {
 					  name: 'Medicine',
 					  type: 'bar',
-					  data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+					  data: ['6.1','5.3','5.2','4.8','4.1','3.9','5.5'],
 					  markPoint: {
 						data: [{
 						  name: 'sales',
@@ -3035,14 +3065,14 @@ if (typeof NProgress != 'undefined') {
 					  },
 					  markLine: {
 						data: [{
-                            yAxis: 100, // Max & Min sugar level
+                            yAxis: 7, // Max & Min sugar level
 						}]
 					  }
 					},
                         {
-                            name: 'Exercise&Medicine',
+                            name: 'NoExerciseMedicine',
                             type: 'bar',
-                            data: [3.6, 2.9, 5.0, 76.4, 18.7, 30.7, 105.6, 122.2, 88.7, 38.8, 17.0, 22.3],
+                            data: ['4.7','8.9','7.5','6.2','4.3','7.9','5.5'],
                             markPoint: {
                                 data: [{
                                     name: 'sales',
@@ -3136,9 +3166,10 @@ if (typeof NProgress != 'undefined') {
 			} 
 			  
 			   //echart Funnel
-			  
-			if ($('#echart_pyramid').length ){ 
-			  
+
+			if ($('#echart_pyramid').length ){
+
+
 			  var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
 
 			  echartFunnel.setOption({
