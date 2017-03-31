@@ -15,7 +15,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>User Settings</h2>
+                            <h2>{{ trans('text.settingsTitle') }}</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -35,7 +35,7 @@
                                         </div>
                                     @endif
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Unit: </label>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('text.settingsF1') }}</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select name="unit" class="form-control">
                                                 @if(Auth::user()->unit == "mmol/l")
@@ -51,14 +51,15 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="minTaarget">Minimum Target: </span>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="minTaarget">
+                                            {{ trans('text.settingsF2') }}
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="text" id="minTarget" name="minTarget" required="required" placeholder="{{ Auth::user()->minTarget }}" class="form-control col-md-7 col-xs-12">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="maxTarget">Maximum Target:
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="maxTarget">{{ trans('text.settingsF5') }}
                                         </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <input type="text" id="maxTarget" name="maxTarget" required="required" placeholder="{{ Auth::user()->maxTarget }}" class="form-control col-md-7 col-xs-12">
@@ -66,7 +67,7 @@
                                     </div>
                                     <div class="form-group">
 
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Language: </label>
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('text.settingsF3') }}</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
                                             <select name="language" class="form-control">
                                                 @if(app()->getLocale() == "en")
@@ -83,7 +84,7 @@
                                     <div class="ln_solid"></div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button type="submit" class="btn btn-success">Submit</button>
+                                            <button type="submit" class="btn btn-success">{{ trans('text.settingsF4') }}</button>
                                         </div>
                                     </div>
 

@@ -28,4 +28,12 @@ return [
     'mbsT2' => 'الوقت',
     'mbsT3' => 'مع',
     'mbsT4' => 'تم الإضافة',
+    'settingsTitle' => 'إعدادات المستخدم',
+    'settingsF1' => 'إختر الوحدة: ',
+    'settingsF2' => 'الهدف الأدنى: ',
+    'settingsF3' => 'إختر اللغة: ',
+    'settingsF4' => 'حفظ',
+    'settingsF5' => 'الهدف الأعلى: ',
+
+
 ];

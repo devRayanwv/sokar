@@ -54,6 +54,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:user']], function(
     Route::get('/settings', 'HomeController@settings');
     Route::post('/settings', 'HomeController@editSettings');
 
+    Route::get('/medicine', 'HomeController@medicine');
+    Route::post('/medicine', 'HomeController@addMedicine');
+    Route::get('/medicine/delete/{medID}', 'HomeController@medicineDelete');
+
+    Route::get('/exercise', 'HomeController@exercise');
+    Route::post('/exercise', 'HomeController@addExercise');
+    Route::get('/exercise/delete/{exerciseID}', 'HomeController@exerciseDelete');
+
+
     Route::get('/pdf', 'HomeController@pdfPage');
     Route::get('/pdf/get/{filename}', 'HomeController@pdfDownload');
     Route::get('/pdf/delete/{fileID}', 'HomeController@pdfDelete');

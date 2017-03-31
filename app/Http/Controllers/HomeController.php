@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exercise;
 use App\File;
+use App\Medicine;
 use App\SugarLevel;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,6 +39,67 @@ class HomeController extends Controller
         return view('dashboard', compact('data', 'level'));
     }
 
+    public function medicine()
+    {
+        $data = Medicine::all();
+        return view('medicine', compact('data'));
+    }
+
+    public function addMedicine(Request $request)
+    {
+        $input = $request->all();
+        $mbs = Medicine::create([
+            'name' => $input['name'],
+            'note' => $input['note'],
+            'dose' => $input['dose']
+        ]);
+
+        if (!is_null($mbs))
+            $mbs->save();
+
+        return \Redirect::back()->with('status', 'New medicine added successfully. ');
+
+    }
+
+    public function medicineDelete(Request $request, $medID)
+    {
+        $entry = Medicine::where('id', $medID)->first();
+
+        $entry->delete();
+        return \Redirect::back()->with('status', 'The medicine has been deleted.');
+    }
+
+
+
+    public function exercise()
+    {
+        $data = Exercise::all();
+        return view('exercise', compact('data'));
+    }
+
+    public function addExercise(Request $request)
+    {
+        $input = $request->all();
+        $mbs = Exercise::create([
+            'name' => $input['name'],
+            'duration' => $input['duration']
+        ]);
+
+        if (!is_null($mbs))
+            $mbs->save();
+
+        return \Redirect::back()->with('status', 'New exercise added successfully. ');
+
+    }
+
+    public function exerciseDelete(Request $request, $exerID)
+    {
+        $entry = Exercise::where('id', $exerID)->first();
+
+        $entry->delete();
+        return \Redirect::back()->with('status', 'The exercise has been deleted.');
+    }
+
     public function profile()
     {
         return view('profile');
@@ -56,9 +119,8 @@ class HomeController extends Controller
             $user->save();
             return \Redirect::back()->with('status', 'New settings store successfully.');
         }
-
-
     }
+
 
     public function settings()
     {

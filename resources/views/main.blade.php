@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-md-8">
                     <p>
-                        - Project description
+                        The application will help diabetics by tracking their sugar level, food, time, and medicine. Then the application will represent the data through the use of graphs. Also, users can easily share their data with others.
                     </p>
                 </div>
             </div>

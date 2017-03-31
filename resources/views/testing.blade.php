@@ -75,7 +75,7 @@
                                     <thead>
                                     <tr>
                                         <th>Level</th>
-                                        <th>High/Normal</th>
+                                        <th>High/Normal/Low</th>
                                         <th>Time</th>
                                         <th>With</th>
                                         <th>Note</th>
@@ -86,9 +86,11 @@
                                         <tr>
                                             <td><span class="label label-danger">{{ $d->value }}</span></td>
                                             <td class="hidden-phone">
-                                                @if($d->value > Auth::user()->maxTarget or $d->value < Auth::user()->minTarget)
+                                                @if($d->value > Auth::user()->maxTarget)
                                                     <span class="label label-danger">High</span>
-                                                @else
+                                                @elseif( $d->value < Auth::user()->minTarget)
+                                                    <span class="label label-success">Low</span>
+                                                    @else
                                                     <span class="label label-success">Normal</span>
                                                 @endif
                                             </td>

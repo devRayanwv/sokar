@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
+use App\SugarLevel;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,11 @@ class AdminController extends Controller
     public function index(Request $request)
     {
         $data = User::orderBy('id')->paginate(20);
-        return view('admin.main',compact('data'))
+        $stat['userCount'] = User::all()->count();
+        $stat['testCount'] = SugarLevel::all()->count();
+        $stat['pdfCount'] = File::all()->count();
+
+        return view('admin.main',compact('data', 'stat'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 

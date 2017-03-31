@@ -55,7 +55,7 @@
                     <li><a href="/dashboard/medicine"><i class="fa fa-stethoscope"></i>{{ trans('text.menuMedicine') }}</a></li>
                     <li><a href="/dashboard/exercise"><i class="fa fa-thumbs-o-up"></i>{{ trans('text.menuExercise') }}</a></li>
                     <li><a href="/dashboard/pdf"><i class="fa fa-file-pdf-o"></i>{{ trans('text.menuPDF') }}</a></li>
-                    <li><a href="/dashboard/links"><i class="fa fa-link"></i>{{ trans('text.menuLinks') }}</a></li>
+                    <li><a href="#"><i class="fa fa-link"></i>{{ trans('text.menuLinks') }}</a></li>
                     <li><a href="/dashboard/profile"><i class="fa fa-folder-open"></i>{{ trans('text.menuProfile') }}</a></li>
                     <li><a href="/dashboard/settings"><i class="fa fa-cogs"></i>{{ trans('text.menuSettings') }}</a></li>
 
