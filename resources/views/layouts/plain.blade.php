@@ -50,14 +50,14 @@
               <div class="menu_section">
                 <h3>Main Options</h3>
                 <ul class="nav side-menu">
-                    <li><a href="/dashboard"><i class="fa fa-home"></i>Home</a></li>
-                    <li><a href="/dashboard/mbs"><i class="fa fa-tint"></i>Manage Blood Sugar</a></li>
-                    <li><a href="/dashboard/medicine"><i class="fa fa-stethoscope"></i>Medicine</a></li>
-                    <li><a href="/dashboard/exercise"><i class="fa fa-thumbs-o-up"></i>Exercise</a></li>
-                    <li><a href="/dashboard/pdf"><i class="fa fa-file-pdf-o"></i>PDF files</a></li>
-                    <li><a href="/dashboard/links"><i class="fa fa-link"></i>Links</a></li>
-                    <li><a href="/dashboard/profile"><i class="fa fa-folder-open"></i>Profile</a></li>
-                    <li><a href="/dashboard/settings"><i class="fa fa-cogs"></i>Settings</a></li>
+                    <li><a href="/dashboard"><i class="fa fa-home"></i>{{ trans('text.menuHome') }}</a></li>
+                    <li><a href="/dashboard/mbs"><i class="fa fa-tint"></i>{{ trans('text.menuMBS') }}</a></li>
+                    <li><a href="/dashboard/medicine"><i class="fa fa-stethoscope"></i>{{ trans('text.menuMedicine') }}</a></li>
+                    <li><a href="/dashboard/exercise"><i class="fa fa-thumbs-o-up"></i>{{ trans('text.menuExercise') }}</a></li>
+                    <li><a href="/dashboard/pdf"><i class="fa fa-file-pdf-o"></i>{{ trans('text.menuPDF') }}</a></li>
+                    <li><a href="/dashboard/links"><i class="fa fa-link"></i>{{ trans('text.menuLinks') }}</a></li>
+                    <li><a href="/dashboard/profile"><i class="fa fa-folder-open"></i>{{ trans('text.menuProfile') }}</a></li>
+                    <li><a href="/dashboard/settings"><i class="fa fa-cogs"></i>{{ trans('text.menuSettings') }}</a></li>
 
 
                 </ul>

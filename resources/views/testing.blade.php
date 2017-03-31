@@ -19,11 +19,6 @@
     <!-- Custom Theme Style -->
     <link href="{{ public_path('css/custom.min.css') }}" rel="stylesheet">
 
-    <style>
-        body {
-            background: blue;
-        }
-    </style>
 </head>
 
 <body>
@@ -50,7 +45,16 @@
                             </div>
                             <div class="x_content">
                                 <div style="width:800px;height:200;">
-                                    <!-- Content -->
+                                    <h4>Name: {{ Auth::user()->name }}</h4>
+                                    <h4>Number of Test: {{ $stat['total'] }}</h4>
+                                    <h4>Average: {{ $stat['avg'] }}</h4>
+                                    <br>
+                                    <h4>Highest Test: {{ $stat['max'] }} on {{ $stat['maxDate']['created_at']->formatLocalized('%A %d %B %Y')}}</h4>
+                                    <h4>Number of High Test: {{ $stat['maxCount'] }}</h4>
+                                    <br>
+                                    <h4>Lowest Test: {{ $stat['min'] }} on {{ $stat['minDate']['created_at']->formatLocalized('%A %d %B %Y')}}</h4>
+                                    <h4>Number of Low Test: {{ $stat['minCount'] }}</h4>
+
                                 </div>
                             </div>
                         </div>
@@ -147,313 +151,12 @@
 
 <script src="{{ public_path('js/echarts.min.js') }}"></script>
 
-
-<script>
-
-    if ($('#mainb').length ){
-        var levels = {!! json_encode($level) !!}; // Get values from controller
-        var theme = {
-            color: [
-                '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
-                '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
-            ],
-
-            title: {
-                itemGap: 8,
-                textStyle: {
-                    fontWeight: 'normal',
-                    color: '#408829'
-                }
-            },
-
-            dataRange: {
-                color: ['#1f610a', '#97b58d']
-            },
-
-            toolbox: {
-                color: ['#408829', '#408829', '#408829', '#408829']
-            },
-
-            tooltip: {
-                backgroundColor: 'rgba(0,0,0,0.5)',
-                axisPointer: {
-                    type: 'line',
-                    lineStyle: {
-                        color: '#408829',
-                        type: 'dashed'
-                    },
-                    crossStyle: {
-                        color: '#408829'
-                    },
-                    shadowStyle: {
-                        color: 'rgba(200,200,200,0.3)'
-                    }
-                }
-            },
-
-            dataZoom: {
-                dataBackgroundColor: '#eee',
-                fillerColor: 'rgba(64,136,41,0.2)',
-                handleColor: '#408829'
-            },
-            grid: {
-                borderWidth: 0
-            },
-
-            categoryAxis: {
-                axisLine: {
-                    lineStyle: {
-                        color: '#408829'
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: ['#eee']
-                    }
-                }
-            },
-
-            valueAxis: {
-                axisLine: {
-                    lineStyle: {
-                        color: '#408829'
-                    }
-                },
-                splitArea: {
-                    show: true,
-                    areaStyle: {
-                        color: ['rgba(250,250,250,0.1)', 'rgba(200,200,200,0.1)']
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        color: ['#eee']
-                    }
-                }
-            },
-            timeline: {
-                lineStyle: {
-                    color: '#408829'
-                },
-                controlStyle: {
-                    normal: {color: '#408829'},
-                    emphasis: {color: '#408829'}
-                }
-            },
-
-            k: {
-                itemStyle: {
-                    normal: {
-                        color: '#68a54a',
-                        color0: '#a9cba2',
-                        lineStyle: {
-                            width: 1,
-                            color: '#408829',
-                            color0: '#86b379'
-                        }
-                    }
-                }
-            },
-            map: {
-                itemStyle: {
-                    normal: {
-                        areaStyle: {
-                            color: '#ddd'
-                        },
-                        label: {
-                            textStyle: {
-                                color: '#c12e34'
-                            }
-                        }
-                    },
-                    emphasis: {
-                        areaStyle: {
-                            color: '#99d2dd'
-                        },
-                        label: {
-                            textStyle: {
-                                color: '#c12e34'
-                            }
-                        }
-                    }
-                }
-            },
-            force: {
-                itemStyle: {
-                    normal: {
-                        linkStyle: {
-                            strokeColor: '#408829'
-                        }
-                    }
-                }
-            },
-            chord: {
-                padding: 4,
-                itemStyle: {
-                    normal: {
-                        lineStyle: {
-                            width: 1,
-                            color: 'rgba(128, 128, 128, 0.5)'
-                        },
-                        chordStyle: {
-                            lineStyle: {
-                                width: 1,
-                                color: 'rgba(128, 128, 128, 0.5)'
-                            }
-                        }
-                    },
-                    emphasis: {
-                        lineStyle: {
-                            width: 1,
-                            color: 'rgba(128, 128, 128, 0.5)'
-                        },
-                        chordStyle: {
-                            lineStyle: {
-                                width: 1,
-                                color: 'rgba(128, 128, 128, 0.5)'
-                            }
-                        }
-                    }
-                }
-            },
-            gauge: {
-                startAngle: 225,
-                endAngle: -45,
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        color: [[0.2, '#86b379'], [0.8, '#68a54a'], [1, '#408829']],
-                        width: 8
-                    }
-                },
-                axisTick: {
-                    splitNumber: 10,
-                    length: 12,
-                    lineStyle: {
-                        color: 'auto'
-                    }
-                },
-                axisLabel: {
-                    textStyle: {
-                        color: 'auto'
-                    }
-                },
-                splitLine: {
-                    length: 18,
-                    lineStyle: {
-                        color: 'auto'
-                    }
-                },
-                pointer: {
-                    length: '90%',
-                    color: 'auto'
-                },
-                title: {
-                    textStyle: {
-                        color: '#333'
-                    }
-                },
-                detail: {
-                    textStyle: {
-                        color: 'auto'
-                    }
-                }
-            },
-            textStyle: {
-                fontFamily: 'Arial, Verdana, sans-serif'
-            }
-        };
-
-        var echartBar = echarts.init(document.getElementById('mainb'), theme);
-
-        echartBar.setOption({
-            title: {
-                text: 'Sugar Level',
-                subtext: ''
-            },
-            tooltip: {
-                trigger: 'axis'
-            },
-            legend: {
-                data: ['Exercise', 'Medicine', 'No Exercise&Medicine']
-            },
-            toolbox: {
-                show: false
-            },
-            calculable: false,
-            xAxis: [{
-                type: 'category',
-                data: ['Fasting', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner']
-            }],
-            yAxis: [{
-                type: 'value',
-            }],
-
-            series: [{
-                name: 'Exercise',
-                type: 'bar',
-                data: [levels['e']['fasting'], levels['e']['beforeLunch'],levels['e']['afterLunch'],levels['e']['beforeDinner'],levels['e']['afterDinner']],
-                markPoint: {
-                    data: [{
-                        type: 'max',
-                        name: '???'
-                    }, {
-                        type: 'min',
-                        name: '???'
-                    }]
-                },
-                markLine: {
-                    data: [{
-                        yAxis: 4, // Max & Min sugar level
-
-
-                    }]
-                }
-            }, {
-                name: 'Medicine',
-                type: 'bar',
-                data: [levels['m']['fasting'], levels['m']['beforeLunch'],levels['m']['afterLunch'],levels['m']['beforeDinner'],levels['m']['afterDinner']],
-                markPoint: {
-                    data: [{
-                        type: 'max',
-                        name: '???'
-                    }, {
-                        type: 'min',
-                        name: '???'
-                    }]
-                },
-                markLine: {
-                    data: [{
-                        yAxis: 7, // Max & Min sugar level
-                    }]
-                }
-            },
-                {
-                    name: 'No Exercise&Medicine',
-                    type: 'bar',
-                    data: [levels['no']['fasting'], levels['no']['beforeLunch'],levels['no']['afterLunch'],levels['no']['beforeDinner'],levels['no']['afterDinner']],
-                    markPoint: {
-                        data: [{
-                            type: 'max',
-                            name: '???'
-                        }, {
-                            type: 'min',
-                            name: '???'
-                        }]
-                    },
-                    markLine: {
-                        data: [{
-                            yAxis: 4, // Max & Min sugar level
-                        }]
-                    }
-                }
-            ]
-        });
-
-    }
-
-
-
-</script>
+<footer>
+    <div class="pull-right">
+        Demo version of BSM Application
+    </div>
+    <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
 </body>
 </html>

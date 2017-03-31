@@ -7,6 +7,8 @@ use App\SugarLevel;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Carbon\Carbon;
 
@@ -50,6 +52,34 @@ class HomeController extends Controller
             $user->maxTarget = $input['maxTarget'];
             $user->minTarget = $input['minTarget'];
             $user->language = $input['language'];
+
+            $user->save();
+            return \Redirect::back()->with('status', 'New settings store successfully.');
+        }
+
+
+    }
+
+    public function settings()
+    {
+        return view('settings');
+    }
+
+    public function editSettings(Request $request)
+    {
+        $input = $request->all();
+        $user = User::where('id', \Auth::id())->first();
+        if (!is_null($user))
+        {
+            $user->unit = $input['unit'];
+            $user->maxTarget = $input['maxTarget'];
+            $user->minTarget = $input['minTarget'];
+            $user->language = $input['language'];
+
+
+            if (array_key_exists($user->language, Config::get('language'))) {
+                Session::put('applocale', $user->language);
+            }
 
             $user->save();
             return \Redirect::back()->with('status', 'New settings store successfully.');
@@ -136,22 +166,8 @@ class HomeController extends Controller
         $exercise_id = null;
         $medicine_id = null;
         $input = $request->all();
-        switch ($input['period'])
-        {
-            case "1":
-                $period = Carbon::now()->subDays(1);
-                break;
-            case "2":
-                $period = Carbon::now()->subDays(7);
-                break;
-            case "3":
-                $period = Carbon::now()->subDays(30);
-                break;
-            default:
-                $period = Carbon::minValue();
-        }
 
-        switch ($input['with'])
+        switch ($request->get('with'))
         {
             case "1":
                 $exercise_id = null;
@@ -167,11 +183,71 @@ class HomeController extends Controller
                 $exercise_id = 1;
                 $medicine_id = 1;
         }
+
+        switch ($request->get('period'))
+        {
+            case "1":
+                $period = Carbon::now()->subDays(1);
+                break;
+            case "2":
+                $period = Carbon::now()->subDays(7);
+                break;
+            case "3":
+                $period = Carbon::now()->subDays(30);
+                break;
+            default:
+                $period = Carbon::minValue();
+        }
+
         $data =  SugarLevel::all()
             ->sortByDesc('created_at')
             ->where('created_at', '>=', $period)
             ->where('exercise_id', $exercise_id)
             ->where('medicine_id', $medicine_id);
+
+
+        $stat['total'] = SugarLevel::all()
+            ->sortByDesc('created_at')
+            ->where('created_at', '>=', $period)
+            ->where('exercise_id', $exercise_id)
+            ->where('medicine_id', $medicine_id)->count();
+
+        $stat['avg'] = SugarLevel::all()
+            ->sortByDesc('created_at')
+            ->where('created_at', '>=', $period)
+            ->where('exercise_id', $exercise_id)
+            ->where('medicine_id', $medicine_id)->avg('value');
+
+        $stat['max'] = SugarLevel::all()
+            ->sortByDesc('created_at')
+            ->where('created_at', '>=', $period)
+            ->where('exercise_id', $exercise_id)
+            ->where('medicine_id', $medicine_id)->max('value');
+
+        $stat['min'] = SugarLevel::all()
+            ->sortByDesc('created_at')
+            ->where('created_at', '>=', $period)
+            ->where('exercise_id', $exercise_id)
+            ->where('medicine_id', $medicine_id)->min('value');
+
+        $stat['maxDate'] = SugarLevel::all()
+            ->where('created_at', '>=', $period)
+            ->where('value', $stat['max'])->first();
+
+        $stat['maxCount'] = SugarLevel::all()
+            ->where('value', '>', \Auth::user()->maxTarget)
+            ->where('created_at', '>=', $period)
+            ->count();
+
+        $stat['minCount'] = SugarLevel::all()
+            ->where('value', '<', \Auth::user()->minTarget)
+            ->where('created_at', '>=', $period)
+            ->count();
+
+        $stat['minDate'] = SugarLevel::all()
+            ->where('created_at', '>=', $period)
+            ->where('value', $stat['min'])->first();
+
 
        /* $data = SugarLevel::all()->sortByDesc("id")->take(10);
         $level = $this->getAvg();
@@ -195,7 +271,7 @@ class HomeController extends Controller
         //return $content;*/
 
         $level = $this->getAvg();
-        $pdf = \PDF::loadView('testing', compact('data', 'level'));
+        $pdf = \PDF::loadView('testing', compact('data', 'stat'));
         $pdf->setOption('enable-javascript', true);
         $pdf->setOption('images', true);
         $pdf->setOption('javascript-delay', 13000); // page load is quick but even a high number doesn't help
@@ -222,6 +298,12 @@ class HomeController extends Controller
         return \Redirect::to('dashboard/pdf')->with('status', 'The pdf file has been generated.');
     }
 
+    public function testing()
+    {
+        $data = SugarLevel::all();
+
+        return view('testing', compact('data'));
+    }
 
     private function getAvg()
     {

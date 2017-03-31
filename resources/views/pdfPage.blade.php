@@ -37,8 +37,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Period: </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="period" class="form-control">
-                                            <option value="1">Yesterday</option>
+                                        <select name="period" id="period" class="form-control">
+                                            <option value="1" selected>Yesterday</option>
                                             <option value="2">Last Week</option>
                                             <option value="3">Last 30 days</option>
                                             <option value="4">All Tests</option>
@@ -48,8 +48,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">With: </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select name="with" class="form-control">
-                                            <option value="1">No Medicine&Exercice</option>
+                                        <select name="with" id="with" class="form-control">
+                                            <option value="1" selected>No Medicine&Exercice</option>
                                             <option value="2">Exercise</option>
                                             <option value="3">Medicine</option>
                                             <option value="4">Medicine&Exercise</option>
@@ -115,8 +115,6 @@
                                         <td>{{ $d->created_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="/dashboard/pdf/delete/{{ $d->id }}" class="btn btn-danger"><i class="fa fa-trash"></i> Delete</a>
-                                            <a href="#" class="btn btn-success"><i class="fa fa-link"></i> Share by Email</a>
-
                                         </td>
                                     </tr>
                                     @endforeach
@@ -139,9 +137,9 @@
             console.log('doc ready');
             $('#progress4').hide(); //hide progress bar
             console.log('element hidden');
-            $('form').submit(function(event) {
-                var period = $(".period").val();
-                var with1 = $(".with").val();
+            $('form').submit(function(e) {
+                var period = $("#period").val();
+                var with1 = $("#with").val();
 
                 $('#progress4').show(); //show progress bar
 
@@ -149,11 +147,15 @@
                     type: "POST",
                     dataType: 'application/json',
                     data: {
-                        "persiod" : period,
-                        "with" : with1,
-                        "_token": $("#csrf-token").val(),
+                        'period' : period,
+                        'with' : with1,
+                        '_token': $("#csrf-token").val(),
                     },
                     url: 'pdf',
+                    complete: function (data) {
+                        $('#progress4').hide(); //hide progress bar
+                        location.reload();
+                    },
                     success: function(data){
                         $('#progress4').hide(); //hide progress bar
                         $("#result").html(data);

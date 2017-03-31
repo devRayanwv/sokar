@@ -11,7 +11,7 @@
                     <div class="tile-stats">
                         <div class="icon"><i class="fa fa-bars"></i></div>
                         <div class="count" id="total">0</div>
-                        <h3>Number of Tests</h3>
+                        <h3>{{ trans('text.mbsW1') }}</h3>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -24,7 +24,7 @@
                              style="color:#2ab27b"
                              @endif
                              id="avg">0</div>
-                        <h3>Average</h3>
+                        <h3>{{ trans('text.mbsW2') }}</h3>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -37,7 +37,7 @@
                              style="color:#2ab27b"
                              @endif
                              id="high">0</div>
-                        <h3>Highest Number</h3>
+                        <h3>{{ trans('text.mbsW3') }}</h3>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -50,14 +50,14 @@
                              style="color:#2ab27b"
                              @endif
                              id="low">0</div>
-                        <h3>Lowest Number</h3>
+                        <h3>{{ trans('text.mbsW4') }}</h3>
                     </div>
                 </div>
             </div>
 
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Bood Sugar Management Page.</h3>
+                    <h3>{{ trans('text.mbsTitle1') }}</h3>
                 </div>
             </div>
 
@@ -67,7 +67,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Add new Test.</h2>
+                            <h2>{{ trans('text.mbsTitle2') }}</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -86,7 +86,7 @@
                             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="{{ action('HomeController@addMbs') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Time: </label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Time: {{ trans('text.mbsF1') }}</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="timeString_id" class="form-control">
                                             <option value="1">Fasting</option>
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">With: </label>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ trans('text.mbsF2') }}</label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <select name="with" class="form-control">
                                             <option value="1">No Medicine&Exercice</option>
@@ -111,14 +111,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Blood sugar level: </span>
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                                        {{ trans('text.mbsF3') }}
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input type="text" id="first-name" name="value" required="required" class="form-control col-md-7 col-xs-12">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Note:
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">{{ trans('text.mbsF4') }}
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <textarea class="form-control" name="note" rows="3" placeholder="write a note (optional)"></textarea>
@@ -126,7 +127,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                        <button type="submit" class="btn btn-danger">Save</button>
+                                        <button type="submit" class="btn btn-danger">{{ trans('text.mbsF5') }}</button>
                                     </div>
                                 </div>
 
@@ -143,7 +144,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>All Tests.</h2>
+                            <h2>{{ trans('text.mbsTitle3') }}</h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -157,10 +158,10 @@
                             <table class="data table table-striped no-margin">
                                 <thead>
                                 <tr>
-                                    <th>Level</th>
-                                    <th>Time</th>
-                                    <th>With</th>
-                                    <th>Added</th>
+                                    <th>{{ trans('text.mbsT1') }}</th>
+                                    <th>{{ trans('text.mbsT2') }}</th>
+                                    <th>{{ trans('text.mbsT3') }}</th>
+                                    <th>{{ trans('text.mbsT4') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>

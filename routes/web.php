@@ -51,6 +51,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:user']], function(
     Route::get('/profile', 'HomeController@profile');
     Route::post('/profile', 'HomeController@editProfile');
 
+    Route::get('/settings', 'HomeController@settings');
+    Route::post('/settings', 'HomeController@editSettings');
 
     Route::get('/pdf', 'HomeController@pdfPage');
     Route::get('/pdf/get/{filename}', 'HomeController@pdfDownload');
@@ -58,6 +60,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:user']], function(
 
     Route::post('/pdf', 'HomeController@generatePDF');
 
+    Route::get('/testing', 'HomeController@testing');
+
+    Route::get('lang/{lang}', ['as'=>'lang.switch', 'uses'=>'LanguageController@switchLang']);
 });
 
 Route::get('/users/confirmation/{token}', 'Auth\RegisterController@confirmation')->name('confirmation');
