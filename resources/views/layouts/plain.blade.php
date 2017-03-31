@@ -54,7 +54,7 @@
                     <li><a href="/dashboard/mbs"><i class="fa fa-tint"></i>Manage Blood Sugar</a></li>
                     <li><a href="/dashboard/medicine"><i class="fa fa-stethoscope"></i>Medicine</a></li>
                     <li><a href="/dashboard/exercise"><i class="fa fa-thumbs-o-up"></i>Exercise</a></li>
-                    <li><a href="/dashnoard/pdf"><i class="fa fa-file-pdf-o"></i>PDF files</a></li>
+                    <li><a href="/dashboard/pdf"><i class="fa fa-file-pdf-o"></i>PDF files</a></li>
                     <li><a href="/dashboard/links"><i class="fa fa-link"></i>Links</a></li>
                     <li><a href="/dashboard/profile"><i class="fa fa-folder-open"></i>Profile</a></li>
                     <li><a href="/dashboard/settings"><i class="fa fa-cogs"></i>Settings</a></li>
@@ -92,7 +92,7 @@
                                                      document.getElementById('logout-form').submit();">
                         <i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      {{ csrf_field() }}
+                        <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                     </form>
                   </ul>
                 </li>

@@ -51,11 +51,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:user']], function(
     Route::get('/profile', 'HomeController@profile');
     Route::post('/profile', 'HomeController@editProfile');
 
-    Route::get('/latestTest', 'HomeController@latestTest');
+
+    Route::get('/pdf', 'HomeController@pdfPage');
+    Route::get('/pdf/get/{filename}', 'HomeController@pdfDownload');
+    Route::get('/pdf/delete/{fileID}', 'HomeController@pdfDelete');
+
+    Route::post('/pdf', 'HomeController@generatePDF');
 
 });
 
 Route::get('/users/confirmation/{token}', 'Auth\RegisterController@confirmation')->name('confirmation');
 Route::get('/plain', function(){
-    return view('plain');
+    return view('layouts.plain');
 });

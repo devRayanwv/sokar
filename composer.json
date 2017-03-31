@@ -6,9 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-dompdf": "^0.8.0",
         "barryvdh/laravel-ide-helper": "^2.3",
+        "barryvdh/laravel-snappy": "^0.3.3",
+        "knplabs/knp-snappy": "^0.4.3",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "nesbot/carbon": "^1.22",
         "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {

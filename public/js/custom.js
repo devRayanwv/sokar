@@ -2970,38 +2970,27 @@ if (typeof NProgress != 'undefined') {
 
 			  
 			  //echart Bar
-			  
+			 /*
 			if ($('#mainb').length ){
                 // Ajax call
 				var noExeMed = new Array();
 				var med = ['1'];
 				var exer = ['7'];
+                var entries;
 
                 $.ajax({
                     url: '/dashboard/latestTest',
                     dataType: 'application/json',
                     complete: function (data) {
-                        var entries = JSON.parse(data.responseText)
-                        jQuery.each(entries, function(i ,val){
-                        	if (val.exercise_id == null && val.medicine_id == null)
-                        		noExeMed.push(val.value);
-                        	else if (val.exercise_id == null && val.medicine_id == 1)
-                        		med.push(val.value);
-							else if (val.exercise_id == 1 && val.medicine_id == null)
-                                exer.push(val.value)
-						});
-
-
+                        entries = JSON.parse(data.responseText)
+                        entries = entries['no']['fasting'];
                     },
                     success: function (data) {
-                        console.log(data)
+                        entries = JSON.parse(data.responseText)
                     }
                 });
 
-                console.log(noExeMed.toString());
-
-                console.log(['1', '2', '3', '4', '5', '6', '7']);
-
+                console.log(entries);
 
                 var echartBar = echarts.init(document.getElementById('mainb'), theme);
 
@@ -3014,7 +3003,7 @@ if (typeof NProgress != 'undefined') {
 					  trigger: 'axis'
 					},
 					legend: {
-					  data: ['Exercise', 'Medicine', 'NoExerciseMedicine']
+					  data: ['Exercise', 'Medicine', 'No Exercise&Medicine']
 					},
 					toolbox: {
 					  show: false
@@ -3022,15 +3011,16 @@ if (typeof NProgress != 'undefined') {
 					calculable: false,
 					xAxis: [{
 					  type: 'category',
-					  data: ['1', '2', '3', '4', '5', '6', '7']
+					  data: ['Fasting', 'Before Lunch', 'After Lunch', 'Before Dinner', 'After Dinner']
 					}],
 					yAxis: [{
 					  type: 'value',
 					}],
+
 					series: [{
 					  name: 'Exercise',
 					  type: 'bar',
-					  data: ['7.3','7.8','5.5','6.6','7.1','6.9','5.7'],
+					  data: ['7.3','7.8','5.5','6.6','7.1'],
 					  markPoint: {
 						data: [{
 						  type: 'max',
@@ -3044,25 +3034,22 @@ if (typeof NProgress != 'undefined') {
 						data: [{
                             yAxis: 4, // Max & Min sugar level
 
+
                         }]
 					  }
 					}, {
 					  name: 'Medicine',
 					  type: 'bar',
-					  data: ['6.1','5.3','5.2','4.8','4.1','3.9','5.5'],
-					  markPoint: {
-						data: [{
-						  name: 'sales',
-						  value: 182.2,
-						  xAxis: 7,
-						  yAxis: 183,
-						}, {
-						  name: 'purchases',
-						  value: 2.3,
-						  xAxis: 11,
-						  yAxis: 3
-						}]
-					  },
+					  data: ['6.1','5.3','5.2','4.8','4.1'],
+                        markPoint: {
+                            data: [{
+                                type: 'max',
+                                name: '???'
+                            }, {
+                                type: 'min',
+                                name: '???'
+                            }]
+                        },
 					  markLine: {
 						data: [{
                             yAxis: 7, // Max & Min sugar level
@@ -3070,22 +3057,23 @@ if (typeof NProgress != 'undefined') {
 					  }
 					},
                         {
-                            name: 'NoExerciseMedicine',
+                            name: 'No Exercise&Medicine',
                             type: 'bar',
-                            data: ['4.7','8.9','7.5','6.2','4.3','7.9','5.5'],
+                            data: ['4.7','8.9','7.5','6.2','4.3'],
                             markPoint: {
                                 data: [{
-                                    name: 'sales',
-                                    value: 182.2,
-                                    xAxis: 7,
-                                    yAxis: 183,
+                                    type: 'max',
+                                    name: '???'
                                 }, {
-                                    name: 'purchases',
-                                    value: 2.3,
-                                    xAxis: 11,
-                                    yAxis: 3
+                                    type: 'min',
+                                    name: '???'
                                 }]
                             },
+                            markLine: {
+                                data: [{
+                                    yAxis: 4, // Max & Min sugar level
+                                }]
+                            }
                         }
 					]
 				  });
@@ -3093,7 +3081,7 @@ if (typeof NProgress != 'undefined') {
 			}
 			  
 			  
-			  
+			  */
 			  
 			   //echart Radar
 			  

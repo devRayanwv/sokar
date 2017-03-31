@@ -18,15 +18,16 @@ class CreateSugarLevelsTable extends Migration
         Schema::create('sugar_levels', function (Blueprint $table) {
             $table->increments('id');
             $table->double('value');
-            $table->integer('timeOfTest');
             $table->string('note')->nullable();
 
 
+            $table->integer('timeString_id')->nullable()->unsigned();
             $table->integer('exercise_id')->nullable()->unsigned();
             $table->integer('medicine_id')->nullable()->unsigned();
 
-            $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');;
-            $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');;
+            $table->foreign('timeString_id')->references('id')->on('times')->onDelete('cascade');
+            $table->foreign('exercise_id')->references('id')->on('exercises')->onDelete('cascade');
+            $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
 
 
             $table->timestamps();
@@ -46,6 +47,7 @@ class CreateSugarLevelsTable extends Migration
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
+        Schema::dropIfExists('times');
         Schema::dropIfExists('exercises');
         Schema::dropIfExists('medicines');
 

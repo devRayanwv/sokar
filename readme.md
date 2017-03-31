@@ -6,6 +6,6 @@ To use the demo version :-
 
 Go to [Login Page](http://sokar.co/login).
 
-Email: demo@demo.com
+Email: user@user.com
 
-Password: demo123
+Password: 123456

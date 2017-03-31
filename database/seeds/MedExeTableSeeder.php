@@ -33,6 +33,16 @@ class MedExeTableSeeder extends Seeder
             ]
         );
 
+        DB::table('times')->insert(
+            $entries = [
+                ['timeString' => 'Fasting'],
+                ['timeString' => 'Before Lunch'],
+                ['timeString' => 'After Lunch'],
+                ['timeString' => 'Before Dinner'],
+                ['timeString' => 'After Dinner']
+            ]
+        );
+
 
     }
 }
